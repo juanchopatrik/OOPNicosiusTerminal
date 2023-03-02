@@ -42,5 +42,40 @@ namespace OverHoulingBinaries1
             CImaginario temp = new CImaginario(re, ri);
             return temp;
         }
+        public static CImaginario operator -(CImaginario i1, CImaginario i2)
+        {
+            double re = 0;
+            double ri = 0;
+
+            re = i1.Entero - i2.Entero;
+            ri = i1.Imaginario - i2.Imaginario;
+
+            CImaginario temp = new CImaginario(re, ri);
+            return temp;
+        }
+        public static CImaginario operator *(CImaginario i1, CImaginario i2)
+        {
+            double re = 0;
+            double ri = 0;
+
+            re = (i1.Entero * i2.Entero) - (i2.Imaginario * i2.Imaginario); 
+            ri = (i1.Entero * i2.Imaginario) - (i1.Imaginario * i2.Entero); 
+
+            CImaginario temp = new CImaginario(re, ri);
+            return temp;
+        }
+        public static CImaginario operator /(CImaginario i1, CImaginario i2)
+        {
+            double re = 0;
+            double ri = 0;
+
+            re = ((i1.Entero * i2.Entero) + (i1.Imaginario * i2.Imaginario) )
+                / ((i2.Entero * i2.Entero) +  (i2.imaginario * i2.imaginario));
+            ri =  ((i1.Imaginario * i2.Entero) - (i1.Entero * i2.Imaginario)) 
+                / ((i2.Entero * i2.Entero) +  (i2.imaginario * i2.imaginario));
+ 
+            CImaginario temp = new CImaginario(re, ri);
+            return temp;
+        }
     }
 }

@@ -16,7 +16,19 @@ namespace OverHoulingBinaries1
 
             imr = im1 + im2;
 
-            //Console.WriteLine($"{im1} + {im2} = {imr}");
+            Console.WriteLine($"{im1} + {im2} = {imr}");
+
+            imr = im1 - im2;
+
+            Console.WriteLine($"{im1} - {im2} = {imr}");
+
+            imr = im1 * im2;
+
+            Console.WriteLine($"{im1} * {im2} = {imr}");
+
+            imr = im1 / im2;
+
+            Console.WriteLine($"{im1} / {im2} = {imr}");
 
             Person juan = new Person(10000.0);
             Person ana = new Person(5000.0);
