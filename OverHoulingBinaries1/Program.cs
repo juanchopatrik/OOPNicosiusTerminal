@@ -38,6 +38,21 @@ namespace OverHoulingBinaries1
 
             Console.WriteLine($"El salario es = {salario}");
             Console.WriteLine($"La prueba es = {prueba}");
+
+            CImaginario im3 = new CImaginario(1,2);
+            CImaginario im4 = new CImaginario (3,4);
+
+            Console.WriteLine(im3);
+            im3++;
+            Console.WriteLine(im3);
+            im3--;  
+            Console.WriteLine(im3);
+
+            if (im2 == im3)
+                Console.WriteLine("Son Iguales");
+
+            if (im2 == im4)
+                Console.WriteLine("Son Diferentes");
         }
     }
 }

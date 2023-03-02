@@ -77,5 +77,41 @@ namespace OverHoulingBinaries1
             CImaginario temp = new CImaginario(re, ri);
             return temp;
         }
+
+        public static CImaginario operator ++(CImaginario i1)
+        {
+            CImaginario temp = new CImaginario(i1.Entero + 1, i1.Imaginario + 1);
+
+            return temp;
+        }
+
+        public static CImaginario operator --(CImaginario i1)
+        {
+            CImaginario temp = new CImaginario(i1.Entero - 1, i1.Imaginario - 1);
+
+            return temp;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is CImaginario)
+            {
+                CImaginario temp= (CImaginario) obj;
+
+                if (imaginario == temp.Imaginario && entero == temp.Entero)
+                    return true;
+            }
+            return false;
+        }
+
+        public static bool operator ==(CImaginario i1, CImaginario i2)
+        {
+            return i1.Equals(i2);
+        }
+
+        public static bool operator !=(CImaginario i1, CImaginario i2)
+        {
+            return !(i1.Equals(i2));
+        }
     }
 }
