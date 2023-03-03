@@ -136,11 +136,6 @@ namespace OverHoulingBinaries1
             return 0;
         }
 
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
-
         public static bool operator >(CImaginario i1, CImaginario i2)
         {
             if (i1.CompareTo(i2) < 0) return false;
@@ -150,6 +145,10 @@ namespace OverHoulingBinaries1
         {
             if (i1.CompareTo(i2) > 0) return false;
             else return true;
+        }
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }
