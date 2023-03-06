@@ -12,7 +12,6 @@ namespace SerializationForCompositionBinary
         private int cilindros;
         private int hp;
 
-
         public int Cilindros { get => cilindros; set => cilindros = value; }
         public int Hp { get => hp; set => hp = value; }
 

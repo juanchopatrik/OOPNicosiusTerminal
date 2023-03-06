@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
 
-namespace SerializationCompositionXML
+namespace Files
 {
     internal class Program
     {
@@ -23,8 +23,6 @@ namespace SerializationCompositionXML
             {
                 string modelo = "";
                 double costo = 0;
-                int cilindros = 0;
-                int hp = 0;
 
                 Console.WriteLine("Dame el modelo");
                 modelo = Console.ReadLine();
@@ -33,48 +31,63 @@ namespace SerializationCompositionXML
                 valor = Console.ReadLine();
                 costo = Convert.ToDouble(valor);
 
+                CAuto miAuto = new CAuto(costo, modelo);
 
-                Console.WriteLine("Dame los cilindros");
-                valor = Console.ReadLine();
-                cilindros = Convert.ToInt32(valor);
-
-                Console.WriteLine("Dame los hp");
-                valor = Console.ReadLine();
-                hp = Convert.ToInt32(valor);
-
-                CAuto miAuto = new CAuto(costo, modelo, cilindros, hp);
-
+                int numero = 5;
+                bool acceso = false;
+                byte conteo = 120;
 
                 Console.WriteLine("Auto a serializar");
                 miAuto.MuestraInformacion();
 
                 Console.WriteLine("--- Serializamos ---");
 
-                XmlSerializer formateador = new XmlSerializer(typeof(CAuto), new Type[] {typeof (CMotor)});
 
-                Stream miStream = new FileStream("Autos.au", FileMode.Create,
+                FileStream miStream = new FileStream("MiArchivo.arc", FileMode.Create,
                     FileAccess.Write, FileShare.None);
 
-                formateador.Serialize(miStream, miAuto);
+                BinaryWriter writer = new BinaryWriter(miStream);
+
+                writer.Write(miAuto.Modelo);
+                writer.Write(miAuto.Costo);
+
+                writer.Write(numero);
+                writer.Write(acceso);
+                writer.Write(conteo);
+
                 miStream.Close();
             }
-            
+
             if (opcion == 2)
             {
                 Console.WriteLine("----Deserializamos-----");
 
-                XmlSerializer formateador = new XmlSerializer(typeof(CAuto), new Type[] {typeof (CMotor)});
-
-                Stream miStream = new FileStream("Autos.au",
+                Stream miStream = new FileStream("MiArchivo.arc",
                     FileMode.Open, FileAccess.Read, FileShare.None);
 
-                CAuto miAuto = (CAuto)formateador.Deserialize(miStream);
+                BinaryReader reader = new BinaryReader(miStream);
+
+                string modelo = "";
+                double costo = 0;
+                int numero = 0;
+                bool acceso = true;
+                byte conteo = 0;
+
+                modelo = reader.ReadString();
+                costo = reader.ReadDouble();
+                CAuto miAuto = new CAuto(costo, modelo);
+
+                numero = reader.ReadInt32();
+                acceso = reader.ReadBoolean();
+                conteo = reader.ReadByte();
+
                 miStream.Close();
 
-                Console.WriteLine("El auto deserializado es");
                 miAuto.MuestraInformacion();
+                Console.WriteLine($"numero : {numero}");
+                Console.WriteLine($"acceso : {acceso}");
+                Console.WriteLine($"conteo : {conteo}");
             }
-        }
         }
     }
 }
